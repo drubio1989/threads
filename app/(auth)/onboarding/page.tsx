@@ -21,7 +21,7 @@ async function Page() {
       <p className='mt-3 text-base-regular text-light-2'>Complete your profile</p>
 
       <section className='mt-9 bg-dark-2 p-10'>
-        <AccountProfile user={userData} btnTitle="Continue"/>
+        <AccountProfile user={userData} btnTitle="Submit"/>
       </section>
     </main>
   )
