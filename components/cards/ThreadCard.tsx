@@ -24,7 +24,7 @@ interface Props {
   isComment?: boolean;
 }
 
-const ThreadCard = () => ({
+function ThreadCard({
   id,
   currentUserId,
   parentId,
@@ -33,7 +33,7 @@ const ThreadCard = () => ({
   community,
   createdAt,
   comments
-}: Props) => {
+}: Props) {
   return (
     <article>
       <h2 className='text-small-regular text-light-2'>
