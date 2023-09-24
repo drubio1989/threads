@@ -1,4 +1,5 @@
-import { string } from "zod";
+import Link from 'next/link';
+import Image from 'next/image';
 
 interface Props {
   id: string
@@ -32,13 +33,59 @@ function ThreadCard({
   author,
   community,
   createdAt,
-  comments
+  comments,
+  isComment,
 }: Props) {
   return (
-    <article>
-      <h2 className='text-small-regular text-light-2'>
-        {content}
-      </h2>
+    <article className='flex w-full flex-col rounded-xl bg-dark-2 p-7'>
+      <div className='flex items-start justify-between'>
+
+        <div className='flex flex-col items-center'>
+          <Link 
+            className='relative h-11 w-11'
+            href={`/profile/${author.id}`}>
+              <Image src={author.image} alt="Profile Image" fill className='cursor-pointer rounded-full'/>
+          </Link>
+          <div className='thread-card_bar'/>
+        </div>
+
+        <div className='flex w-full flex-col ml-3'>
+          <Link  
+            className='w-fit'
+            href={`/profile/${author.id}`}>
+             <h4 className='cursor-pointer text-base-semibold text-light-1'>
+            {author.name}</h4>
+          </Link>
+
+          <p className='mt-2 text-small-regular text-light-2'>{content}</p>
+        
+          <div className='mt-5 flex flex-col gap-3'>
+            <div className='flex gap-3.5'>
+              <Image 
+                className='cursor-pointer object-contain'
+                src='/assets/heart-gray.svg' alt='heart' width={24} height={24} />
+              <Link href={`/thread/${id}`}>
+                <Image 
+                  className='cursor-pointer object-contain'
+                  src='/assets/reply.svg' alt='reply' width={24} height={24} />
+              </Link>
+             <Image 
+                className='cursor-pointer object-contain'
+                src='/assets/repost.svg' alt='repost' width={24} height={24} />
+             <Image 
+                className='cursor-pointer object-contain'
+                src='/assets/share.svg' alt='share' width={24} height={24} />
+            </div>
+
+            {isComment && comments.length > 0 && (
+              <Link href={`/thread/${id}`}>
+                <p className='mt-1 text-suble-medium text-gray-1'>{comments.length} replies</p>
+              </Link>
+            )}
+          </div>
+        </div>
+      </div>
+  
     </article>
   )
 }

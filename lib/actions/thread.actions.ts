@@ -13,6 +13,42 @@ interface Params {
   path: string,
 }
 
+export async function fetchThreadById(id: string) {
+  connectToDB();
+
+  try {
+    const thread = await Thread.findById(id)
+      .populate({
+        path: 'author',
+        model: User,
+        select: "_id id name image",
+      })
+      .populate({
+        path: 'children',
+        populate: [
+          {
+            path: 'author',
+            model: User,
+            select: "_id id name parentId image"
+          },
+          {
+            path: 'children',
+            model: Thread,
+            populate: {
+              path: 'author',
+              model: User,
+              select: '_id id name parentId image'
+            }
+          }
+        ]
+      }).exec();
+
+      return thread;
+  } catch (error: any) {
+    throw new Error(`Failed to create thread: ${error.message}`);
+  }
+}
+
 export async function createThread({ text, author, communityId, path }: Params) {
     try {
       connectToDB();
