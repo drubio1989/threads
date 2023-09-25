@@ -15,7 +15,7 @@ const Page = async ({ params }: { params: { id: string }}) => {
   if (!userInfo.onboarded) return redirect('/onboarding');
 
   const thread = await fetchThreadById(params.id)
-  console.log('hello',thread.children)
+  
   return (
     <section className='relative'>
         <div>
