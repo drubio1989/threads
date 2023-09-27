@@ -16,10 +16,10 @@ const communitySchema = new mongoose.Schema({
   }],
   members: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'CUser'
+    ref: 'User'
   }]
 })
 
-const Community = mongoose.models.Community|| mongoose.model('Community', communitySchema);
+const Community = mongoose.models.Community || mongoose.model('Community', communitySchema);
 
 export default Community;
