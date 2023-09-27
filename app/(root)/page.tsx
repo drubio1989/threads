@@ -1,7 +1,7 @@
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import { fetchUser } from "@/lib/actions/user.actions";
 import { fetchPosts } from "@/lib/actions/thread.actions";
-import User from "@/lib/models/user.model";
 import ThreadCard from "@/components/cards/ThreadCard";
 
 export default async function Home() {
