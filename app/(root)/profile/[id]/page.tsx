@@ -10,8 +10,9 @@ import ThreadsTab from "@/components/shared/ThreadsTab";
 async function Page({ params }: { params: { id: string }}) {
   const user = await currentUser();
   if (!user) return null;
-
+  console.log('user', user)
   const userInfo = await fetchUser(params.id);
+  console.log('userInfo', userInfo)
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   return (
